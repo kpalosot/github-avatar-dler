@@ -6,6 +6,11 @@ var myArgs = process.argv.slice(2);
 console.log("Welcome to the Github Avatar Downloader!");
 
 function getRepoContributors(repoOwner, repoName, cb){
+  if(!repoOwner || !repoName){
+    console.log("Request denied.");
+    console.log("Usage: node download_avatars.js <repository owner> <repository name>");
+    return;
+  }
   var options = {
     url: `https://api.github.com/repos/${repoOwner}/${repoName}/contributors`,
     headers: {
@@ -35,6 +40,7 @@ function downloadImageByURL(url, filePath){
 
 getRepoContributors(myArgs[0], myArgs[1], function(err, result) {
   console.log("Errors:", err);
+
   if(!fs.existsSync('./avatars')){
     fs.mkdirSync('./avatars');
   }
