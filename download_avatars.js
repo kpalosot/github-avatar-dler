@@ -1,7 +1,7 @@
 var request = require("request");
-const secret = require("./secrets");
 const fs = require("fs");
 var myArgs = process.argv.slice(2);
+require("dotenv").config();
 
 console.log("Welcome to the Github Avatar Downloader!");
 
@@ -14,8 +14,8 @@ function getRepoContributors(repoOwner, repoName, cb){
   var options = {
     url: `https://api.github.com/repos/${repoOwner}/${repoName}/contributors`,
     headers: {
-      'User-Agent': 'request',
-      'Authorization': secret.GITHUB_TOKEN
+      "User-Agent": "request",
+      "Authorization": process.env.GITHUB_TOKEN
     }
   };
 
@@ -32,7 +32,7 @@ function getRepoContributors(repoOwner, repoName, cb){
 
 function downloadImageByURL(url, filePath){
   request(url)
-    .on('error', (err) => {
+    .on("error", (err) => {
       throw err;
     })
     .pipe(fs.createWriteStream(`./${filePath}`));
@@ -41,8 +41,8 @@ function downloadImageByURL(url, filePath){
 getRepoContributors(myArgs[0], myArgs[1], function(err, result) {
   console.log("Errors:", err);
 
-  if(!fs.existsSync('./avatars')){
-    fs.mkdirSync('./avatars');
+  if(!fs.existsSync("./avatars")){
+    fs.mkdirSync("./avatars");
   }
 
   result.forEach((e) => {
@@ -50,6 +50,4 @@ getRepoContributors(myArgs[0], myArgs[1], function(err, result) {
   });
 
 });
-
-// downloadImageByURL("https://avatars2.githubusercontent.com/u/2741?v=3&s=466", "./kvirani.jpg");
 
