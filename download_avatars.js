@@ -33,11 +33,16 @@ function downloadImageByURL(url, filePath){
     .pipe(fs.createWriteStream(`./${filePath}`));
 }
 
-getRepoContributors("jquery", "jquery", function(err, result) {
+getRepoContributors(myArgs[0], myArgs[1], function(err, result) {
   console.log("Errors:", err);
+  if(!fs.existsSync('./avatars')){
+    fs.mkdirSync('./avatars');
+  }
+
   result.forEach((e) => {
-    console.log(e.avatar_url);
+    downloadImageByURL(e.avatar_url, `./avatars/${e.login}`);
   });
+
 });
 
 // downloadImageByURL("https://avatars2.githubusercontent.com/u/2741?v=3&s=466", "./kvirani.jpg");
