@@ -1,0 +1,23 @@
+{
+  "name": "github-avatar-dler",
+  "version": "1.0.0",
+  "description": "## Problem Statement",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kpalosot/github-avatar-dler.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kpalosot/github-avatar-dler/issues"
+  },
+  "homepage": "https://github.com/kpalosot/github-avatar-dler#readme",
+  "dependencies": {
+    "request": "^2.87.0"
+  }
+}
